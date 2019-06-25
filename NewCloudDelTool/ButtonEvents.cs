@@ -43,6 +43,11 @@ namespace NewCloudDelTool
                     case "AR":
                         resultMessage = DelReceive(dhstr);
                         break;
+                    //其他应收单
+                    case "QT":
+                        resultMessage = DelReturnOrder(dhstr);
+                        break;
+
                 }
             }
             //输出结果

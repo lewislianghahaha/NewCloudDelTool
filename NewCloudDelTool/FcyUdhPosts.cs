@@ -8,17 +8,25 @@ namespace NewCloudDelTool
 {
     public class FcyUdhPosts
     {
-        //删除收款退款单
+        /// <summary>
+        /// 删除U订货上的"退款单"(K3对应:收款退款单 及 其他应收单)
+        /// </summary>
+        /// <param name="cOutSysKey"></param>
+        /// <returns></returns>
         public static string Tkddel(string cOutSysKey)
         {
             string ret = "";
             Dictionary<string, string> param = new Dictionary<string, string>();
-            param.Add("cOutSysKey", cOutSysKey);
+            param.Add("outsyskey", cOutSysKey);
             ret = FcyWeb.Post("/ws/Payments/delRefund", param);
             return ret;
         }
 
-        //删除付款单
+        /// <summary>
+        /// 删除付款单
+        /// </summary>
+        /// <param name="cOutSysKey"></param>
+        /// <returns></returns>
         public static string Zfddel(string cOutSysKey)
         {
             string ret = "";
@@ -28,7 +36,11 @@ namespace NewCloudDelTool
             return ret;
         }
 
-        //删除U订单上的"发货通知单"(k3对应的:应收单)
+        /// <summary>
+        /// 删除U订货上的"发货通知单"(k3对应:应收单)
+        /// </summary>
+        /// <param name="cOutSysKey"></param>
+        /// <returns></returns>
         public static string Xsfhdelup(string cOutSysKey)
         {
             string ret = "";
@@ -38,7 +50,11 @@ namespace NewCloudDelTool
             return ret;
         }
 
-        //订单 回退(k3:销售订单使用)
+        /// <summary>
+        /// 订单 回退(k3:销售订单使用)
+        /// </summary>
+        /// <param name="dh"></param>
+        /// <returns></returns>
         public static string Ddht(string dh)
         {
             string ret = "";
@@ -48,7 +64,11 @@ namespace NewCloudDelTool
             return ret;
         }
 
-        //上传应收单
+        /// <summary>
+        /// 上传应收单
+        /// </summary>
+        /// <param name="row"></param>
+        /// <returns></returns>
         public static string Ysdup(DataRow row)
         {
             string ret = "";
