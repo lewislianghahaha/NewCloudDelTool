@@ -15,7 +15,7 @@ namespace NewCloudDelTool
             //订单退回操作
             base.BarItemClick(e);
 
-            if (e.BarItemKey == "tbButton")
+            if (e.BarItemKey == "tbDelUOrder")
             {
                 //定义获取表头信息对像
                 var docScddIds1 = View.Model.DataObject;
@@ -49,9 +49,9 @@ namespace NewCloudDelTool
                         break;
 
                 }
+                //输出结果
+                View.ShowMessage(resultMessage);
             }
-            //输出结果
-            View.ShowMessage(resultMessage);
         }
 
         /// <summary>
