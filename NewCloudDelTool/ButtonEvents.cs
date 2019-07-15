@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO.Pipes;
 using fcydata;
 using Kingdee.BOS.Core.Bill.PlugIn;
 using Kingdee.BOS.Core.DynamicForm.PlugIn.Args;
@@ -10,24 +9,26 @@ namespace NewCloudDelTool
     {
         public override void BarItemClick(BarItemClickEventArgs e)
         {
-            var resultMessage = string.Empty;
-
             //订单退回操作
             base.BarItemClick(e);
 
+            var resultMessage = string.Empty;
+
+            //定义获取表头信息对像
+            var docScddIds1 = View.Model.DataObject;
+            //获取表头中单据编号信息(注:这里的BillNo为单据编号中"绑定实体属性"项中获得)
+            var dhstr = docScddIds1["BillNo"].ToString();
+
+            fcy.Service.CnnStr = "http://172.16.4.252/websys/service.asmx";
+            fcy.Service.userdmstr = "feng";
+            fcy.Service.passwordstr = "";
+
+            //将获取的单据名称进行截取,取前两位
+            var orderno = dhstr.Substring(0, 2);
+
+            //删除U订货单据(除退款单外使用)
             if (e.BarItemKey == "tbDelUOrder")
             {
-                //定义获取表头信息对像
-                var docScddIds1 = View.Model.DataObject;
-                //获取表头中单据编号信息(注:这里的BillNo为单据编号中"绑定实体属性"项中获得)
-                var dhstr = docScddIds1["BillNo"].ToString();
-
-                fcy.Service.CnnStr = "http://172.16.4.252/websys/service.asmx";
-                fcy.Service.userdmstr = "feng";
-                fcy.Service.passwordstr = "";
-
-                //将获取的单据名称进行截取,取前两位
-                var orderno = dhstr.Substring(0,2);
                 //根据获取的标记分别进行单据删除
                 switch (orderno)
                 {
@@ -35,19 +36,31 @@ namespace NewCloudDelTool
                     case "XS":
                         resultMessage = DelSalesOrder(dhstr);
                         break;
+                    //应收单
+                    case "AR":
+                        resultMessage = DelReceive(dhstr);
+                        break;
+                }
+                //输出结果
+                View.ShowMessage(resultMessage);
+            }
+            //删除U订货单据(退款单使用)
+            else if (e.BarItemKey == "tbDelUOrderR")
+            {
+                switch (orderno)
+                {
+                    //其他应收单
+                    case "QT":
+                        resultMessage = DelReturnOrder(dhstr);
+                        break;
                     //收款退款单
                     case "SK":
                         resultMessage = DelReturnOrder(dhstr);
                         break;
                     //应收单
                     case "AR":
-                        resultMessage = DelReceive(dhstr);
-                        break;
-                    //其他应收单
-                    case "QT":
                         resultMessage = DelReturnOrder(dhstr);
                         break;
-
                 }
                 //输出结果
                 View.ShowMessage(resultMessage);
