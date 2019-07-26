@@ -44,27 +44,6 @@ namespace NewCloudDelTool
                 //输出结果
                 View.ShowMessage(resultMessage);
             }
-            //删除U订货单据(退款单使用)
-            else if (e.BarItemKey == "tbDelUOrderR")
-            {
-                switch (orderno)
-                {
-                    //其他应收单
-                    case "QT":
-                        resultMessage = DelReturnOrder(dhstr);
-                        break;
-                    //收款退款单
-                    case "SK":
-                        resultMessage = DelReturnOrder(dhstr);
-                        break;
-                    //应收单
-                    case "AR":
-                        resultMessage = DelReturnOrder(dhstr);
-                        break;
-                }
-                //输出结果
-                View.ShowMessage(resultMessage);
-            }
         }
 
         /// <summary>
@@ -114,7 +93,7 @@ namespace NewCloudDelTool
         }
 
         /// <summary>
-        /// 删除应收单
+        /// 删除U订货上的"发货通知单"
         /// </summary>
         /// <param name="orderno"></param>
         /// <returns></returns>
