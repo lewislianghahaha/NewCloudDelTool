@@ -37,7 +37,7 @@ namespace NewCloudDelTool
         }
 
         /// <summary>
-        /// 删除U订货上的"发货通知单"(k3对应:应收单)
+        /// 删除U订货上的"发货单"(k3对应:应收单)
         /// </summary>
         /// <param name="cOutSysKey"></param>
         /// <returns></returns>

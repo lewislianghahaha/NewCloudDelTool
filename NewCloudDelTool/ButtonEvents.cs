@@ -93,7 +93,7 @@ namespace NewCloudDelTool
         }
 
         /// <summary>
-        /// 删除U订货上的"发货通知单"
+        /// 删除U订货上的"发货单"
         /// </summary>
         /// <param name="orderno"></param>
         /// <returns></returns>
